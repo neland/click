@@ -30,3 +30,10 @@ build/
 dist/
 *.exe
 *.spec
+installer/
+
+# Generated files
+icon.ico
+
+# Utility scripts (local only)
+push_to_github.bat
