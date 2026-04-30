@@ -1,0 +1,60 @@
+#include <windows.h>
+#include "resource.h"
+
+IDR_MAINMENU MENU
+BEGIN
+    POPUP "任务(&T)"
+    BEGIN
+        MENUITEM "添加(&A)\tCtrl+N", ID_TASK_ADD
+        MENUITEM "编辑(&E)\tCtrl+E", ID_TASK_EDIT
+        MENUITEM "删除(&D)\tDel",    ID_TASK_DELETE
+        MENUITEM SEPARATOR
+        MENUITEM "启动(&S)\tF5",     ID_TASK_START
+        MENUITEM "停止(&O)\tF6",     ID_TASK_STOP
+        MENUITEM SEPARATOR
+        MENUITEM "退出(&X)",         ID_FILE_EXIT
+    END
+END
+
+IDD_TASKDIALOG DIALOGEX 0, 0, 360, 280
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "编辑点击任务"
+FONT 9, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "目标窗口", IDC_STATIC, 7, 7, 346, 45
+    LTEXT           "标题/类名:", IDC_STATIC, 14, 22, 40, 8
+    EDITTEXT        IDC_WINDOWTITLE, 60, 20, 220, 12, ES_AUTOHSCROLL
+    PUSHBUTTON      "捕获窗口", IDC_CAPTUREWINDOW, 290, 19, 55, 14
+
+    GROUPBOX        "点击坐标 (相对窗口客户区)", IDC_STATIC, 7, 55, 346, 45
+    LTEXT           "X:", IDC_STATIC, 14, 70, 10, 8
+    EDITTEXT        IDC_POSX, 25, 68, 50, 12, ES_NUMBER
+    LTEXT           "Y:", IDC_STATIC, 85, 70, 10, 8
+    EDITTEXT        IDC_POSY, 96, 68, 50, 12, ES_NUMBER
+    PUSHBUTTON      "取鼠标位置", IDC_GETMOUSEPOS, 160, 67, 55, 14
+
+    GROUPBOX        "触发时间", IDC_STATIC, 7, 103, 346, 50
+    LTEXT           "日期:", IDC_STATIC, 14, 118, 22, 8
+    CONTROL         "", IDC_TRIGGERDATE, "SysDateTimePick32", DTS_SHORTDATEFORMAT | WS_TABSTOP, 40, 116, 90, 12
+    LTEXT           "时间:", IDC_STATIC, 140, 118, 22, 8
+    CONTROL         "", IDC_TRIGGERTIME, "SysDateTimePick32", DTS_TIMEFORMAT | WS_TABSTOP, 166, 116, 80, 12
+    LTEXT           "偏移(ms):", IDC_STATIC, 255, 118, 35, 8
+    EDITTEXT        IDC_OFFSET, 292, 116, 50, 12, ES_NUMBER
+
+    GROUPBOX        "点击设置", IDC_STATIC, 7, 156, 346, 70
+    LTEXT           "间隔(ms):", IDC_STATIC, 14, 172, 35, 8
+    EDITTEXT        IDC_INTERVAL, 52, 170, 50, 12, ES_NUMBER
+    LTEXT           "重复次数:", IDC_STATIC, 110, 172, 38, 8
+    EDITTEXT        IDC_REPEAT, 152, 170, 50, 12, ES_NUMBER
+
+    LTEXT           "模式:", IDC_STATIC, 14, 195, 22, 8
+    CONTROL         "后台点击 (PostMessage)", IDC_RADIO_BG, "Button", BS_AUTORADIOBUTTON | WS_GROUP, 40, 193, 100, 10
+    CONTROL         "前台点击 (SendInput)", IDC_RADIO_FG, "Button", BS_AUTORADIOBUTTON, 150, 193, 100, 10
+
+    LTEXT           "按键:", IDC_STATIC, 14, 213, 22, 8
+    CONTROL         "左键", IDC_RADIO_LEFT, "Button", BS_AUTORADIOBUTTON | WS_GROUP, 40, 211, 40, 10
+    CONTROL         "右键", IDC_RADIO_RIGHT, "Button", BS_AUTORADIOBUTTON, 90, 211, 40, 10
+
+    DEFPUSHBUTTON   "确定", IDOK, 200, 255, 70, 16
+    PUSHBUTTON      "取消", IDCANCEL, 280, 255, 70, 16
+END
