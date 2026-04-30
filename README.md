@@ -23,6 +23,10 @@
 - Python 3.7+
 - 无需额外依赖（仅使用 Python 标准库 + tkinter）
 
+## 软件界面
+
+![Precision Clicker UI](ui.png)
+
 ## 快速开始
 
 ```powershell
